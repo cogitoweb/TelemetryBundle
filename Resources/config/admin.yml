@@ -1,0 +1,6 @@
+services:
+    cogitoweb_telemetry.admin.telemetryview:
+        class: Cogitoweb\TelemetryBundle\Admin\TelemetryviewAdmin
+        arguments: [~, Cogitoweb\TelemetryBundle\Entity\Telemetryview, CogitowebTelemetryBundle:TelemetryviewAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Telemetria }

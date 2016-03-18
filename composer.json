@@ -1,0 +1,26 @@
+{
+	"name": "cogitoweb/telemetry-bundle",
+	"description": "Read application-related telemetry from the project",
+	"type": "symfony-bundle",
+	"authors": [
+		{
+			"name": "Daniele Artico",
+			"email": "daniele.artico@cogitoweb.it"
+		}
+	],
+	"keywords": [
+		"telemetry bundle",
+		"application telemetry",
+		"application-related telemetry"
+	],
+	"autoload": {
+		"psr-0": {
+			"Cogitoweb\\TelemetryBundle": ""
+		}
+	},
+	"require": {
+		"symfony/symfony": "~2.3",
+		"gedmo/doctrine-extensions": "~2.3"
+	},
+	"target-dir" : "Cogitoweb/TelemetryBundle"
+}

@@ -1,0 +1,12 @@
+cogitoweb_telemetry_list:
+    path:     /telemetry/list
+    defaults: { _controller: CogitowebTelemetryBundle:Telemetry:list }
+    methods: [GET]
+    
+cogitoweb_telemetry_export:
+    path:     /telemetry/{id}/export
+    defaults: { _controller: CogitowebTelemetryBundle:Telemetry:export }
+    requirements:
+        id:  \d+
+    methods: [GET]
+

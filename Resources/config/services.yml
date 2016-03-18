@@ -1,0 +1,4 @@
+services:
+    cogitoweb_telemetry:
+        class: Cogitoweb\TelemetryBundle\Services\TelemetryService
+        arguments: [@doctrine.ORM.entity_manager]
