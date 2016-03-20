@@ -63,6 +63,9 @@ class TelemetryController extends Controller
         }
 
         $response = new JsonResponse();
+        // optional jsonp
+        if($this->getRequest()->get('callback'))$response->setCallback($this->getRequest()->get('callback'));
+        $response->setData(array('result' => $result, 'message' => $message, 'data' => $data));
         $response->setData(array('result' => $result, 'message' => $message, 'data' => $data));
         
         return $response;
