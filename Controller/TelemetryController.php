@@ -51,10 +51,48 @@ class TelemetryController extends Controller
         try {
             
             $stmt = $connection->executeQuery($sql);
+            $rows = $stmt->fetchAll(\PDO::FETCH_BOTH);
+            
+            // popolamento assi
+            $xaxis = array();
+            $yaxis = array();
+            $zaxis = array();
+            $lat = array();
+            $lon = array();
+            // se impostata proprietà x e y 
+            // altrimenti leggo la prima disponibile
+            foreach($rows as $r) {
+                if(isset($r[0]))
+                {
+                    $xaxis[] = (isset($r['x'])) ? $r['x'] : $r[0];
+                }
+                if(isset($r[1])) 
+                {
+                    $yaxis[] = (isset($r['y'])) ? $r['y'] : $r[1];
+                }
+                if(isset($r[2]))
+                {
+                    $zaxis[] = (isset($r['z'])) ? $r['z'] : $r[2];
+                }
+                
+                if(isset($r['lat']))
+                {
+                    $lat[] = $r['lat'];
+                }
+                if(isset($r['lon']))
+                {
+                    $lon[] = $r['lon'];
+                }
+            }
+            
             $data = array(
                 'id' => $view['id'],
                 'name' => $view['name'],
-                'rows' => $stmt->fetchAll()
+                'x' => $xaxis,
+                'y' => $yaxis,
+                'z' => $zaxis,
+                'lat' => $lat,
+                'lon' => $lon
             );
  
         } catch (\Exception $ex) {
@@ -65,7 +103,6 @@ class TelemetryController extends Controller
         $response = new JsonResponse();
         // optional jsonp
         if($this->getRequest()->get('callback'))$response->setCallback($this->getRequest()->get('callback'));
-        $response->setData(array('result' => $result, 'message' => $message, 'data' => $data));
         $response->setData(array('result' => $result, 'message' => $message, 'data' => $data));
         
         return $response;
